@@ -1,0 +1,8 @@
+# Ignore compiled files
+*.exe
+*.o
+
+# Ignore folders
+output/
+.vscode/
+
