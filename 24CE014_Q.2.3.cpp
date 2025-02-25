@@ -121,7 +121,7 @@ int main() {
             cout<<"Invalid input!"<<endl;  
         }
 
-    } while(choice!=0);
+    } while(choice!=0);0
 
     return 0;
 }
