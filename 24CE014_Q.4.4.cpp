@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <stack>
 using namespace std;
 
 class BankAccount {
@@ -86,27 +85,30 @@ public:
 
 class TransactionHistory {
 private:
-    stack<string> transactions;
+    vector<string> transactions;
 
 public:
     void addTransaction(const string& transaction) {
-        transactions.push(transaction);
+        transactions.push_back(transaction);
     }
 
     void undoLastTransaction() {
         if (!transactions.empty()) {
-            cout << "Undoing last transaction: " << transactions.top() << endl;
-            transactions.pop();
+            cout << "Undoing last transaction: " << transactions.back() << endl;
+            transactions.pop_back();
         } else {
             cout << "No transaction to undo." << endl;
         }
     }
 
     void displayHistory() const {
-        stack<string> temp = transactions;
-        while (!temp.empty()) {
-            cout << temp.top() << endl;
-            temp.pop();
+        if (transactions.empty()) {
+            cout << "No transactions yet." << endl;
+            return;
+        }
+
+        for (const string& transaction : transactions) {
+            cout << transaction << endl;
         }
     }
 };
