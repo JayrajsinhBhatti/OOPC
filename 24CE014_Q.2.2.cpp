@@ -7,48 +7,48 @@ using namespace std;
 class Student
 {
     int RollNumber;
-    string name;
-    float marks1, marks2, marks3, avg;
+    string Name;
+    float Marks1, Marks2, Marks3, Avg;
 
     inline float CalculateAvg() {
-        float Avg = (marks1+marks2+marks3)/3.0;
+        float Avg = (Marks1+Marks2+Marks3)/3.0;
         return Avg;
     }
 
     public:
     Student() {
-        name = "Default";
+        Name = "Default";
         RollNumber = 0;
-        marks1=0;
-        marks2=0;
-        marks3=0;
-        avg=0;
+        Marks1=0;
+        Marks2=0;
+        Marks3=0;
+        Avg=0;
     }
 
     void GetStudentInfo() {
-        cout<<"Enter name of the student: ";
-        cin>>name;
+        cout<<"Enter Name of the student: ";
+        cin>>Name;
 
         cout<<"Enter Roll Number: ";
         cin>>RollNumber;
 
         cout<<"Enter Marks of Subject-1: ";
-        cin>>marks1;
+        cin>>Marks1;
 
         cout<<"Enter Marks of Subject-2: ";
-        cin>>marks2;
+        cin>>Marks2;
 
         cout<<"Enter Marks of Subject-3: ";
-        cin>>marks3;
+        cin>>Marks3;
 
-        avg = CalculateAvg();
+        Avg = CalculateAvg();
     }
 
-    void display() {
+    void Display() {
         cout << "\nRoll No: " << RollNumber << endl;
-        cout << "Name: " << name << endl;
-        cout << "Marks: " << marks1 << ", " << marks2 << ", " << marks3 << endl;
-        cout << "Average: " << avg << endl;
+        cout << "Name: " << Name << endl;
+        cout << "Marks: " << Marks1 << ", " << Marks2 << ", " << Marks3 << endl;
+        cout << "Average: " << Avg << endl;
         cout << "---------------------------" << endl;
     }
 };
@@ -76,8 +76,10 @@ int main()
     } while (choice=="y");
 
     for(auto &s: st) {
-        s.display();
+        s.Display();
     }
+
+    cout << "24CE014 JAYRAJSINH BHATTI";
     
     return 0;
 }

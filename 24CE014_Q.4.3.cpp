@@ -1,7 +1,6 @@
 #include<iostream>
 #include<string>
 #include<vector>
-#include<cmath>
 using namespace std;
 
 class Fuel {
@@ -19,18 +18,18 @@ class Brand: public Fuel {
     string CarBrand;
 
     public:
-    Brand(string f, string name) : Fuel(f){
-        CarBrand = name;
+    Brand(string f, string Name) : Fuel(f){
+        CarBrand = Name;
     }
 };
 
 class Car: public Brand {
     public:
-    Car(string f, string name) : Brand(f, name) {}
+    Car(string f, string Name) : Brand(f, Name) {}
 
     void DisplayCar() {
         cout<<"Fuel Type: "<<FuelType<<endl;
-        cout<<"Brand name: "<<CarBrand<<endl;
+        cout<<"Brand Name: "<<CarBrand<<endl;
         cout<<"-------------------------------"<<endl;
     }
 };
@@ -39,7 +38,7 @@ int main()
 {
     vector<Car> car;
     int choice;
-    string fuel, name;
+    string Fuel, Name;
 
     do
     {
@@ -51,10 +50,10 @@ int main()
         case 1:
         {
             cout<<"Enter Fuel type: ";
-            cin>> fuel;
-            cout<<"Enter Brand name: ";
-            cin>> name;
-            Car c(fuel, name);
+            cin>> Fuel;
+            cout<<"Enter Brand Name: ";
+            cin>> Name;
+            Car c(Fuel, Name);
 
             car.push_back(c);
             break;

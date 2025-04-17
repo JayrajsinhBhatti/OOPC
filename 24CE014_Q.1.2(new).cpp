@@ -4,18 +4,18 @@
 using namespace std;
 
 class Inventory {
-    int productCount = 0;
-    int product[30];
-    string names[30];
-    int prices[30];
-    int quantities[30] = {0};
+    int ProductCount = 0;
+    int Product[30];
+    string Names[30];
+    int Prices[30];
+    int Quantities[30] = {0};
     double Totalvalue = 0;
 
 public:
     // Search Product by ID
-    int search(int id) {
-        for (int i = 0; i < productCount; i++) {
-            if (product[i] == id) {
+    int Search(int id) {
+        for (int i = 0; i < ProductCount; i++) {
+            if (Product[i] == id) {
                 return i; // Return index if found
             }
         }
@@ -23,40 +23,40 @@ public:
     }
 
     // Add or Update Product
-    void addOrUpdate(int id, string name, int price) {
-        int index = search(id);
+    void AddOrUpdate(int id, string Name, int Price) {
+        int index = Search(id);
         if (index != -1) {
             // Product exists, update quantity
-            quantities[index]++;
+            Quantities[index]++;
             cout << "\nProduct quantity updated successfully!\n";
         } else {
-            // Add new product
-            if (productCount >= 30) {
+            // Add new Product
+            if (ProductCount >= 30) {
                 cout << "List is full!" << endl;
                 return;
             }
-            product[productCount] = id;
-            names[productCount] = name;
-            prices[productCount] = price;
-            quantities[productCount] = 1;
-            productCount++;
+            Product[ProductCount] = id;
+            Names[ProductCount] = Name;
+            Prices[ProductCount] = Price;
+            Quantities[ProductCount] = 1;
+            ProductCount++;
             cout << "\nProduct added successfully!\n";
         }
-        calculateTotalValue();
+        CalculateTotalValue();
     }
 
     // Calculate Total Value
-    void calculateTotalValue() {
+    void CalculateTotalValue() {
         Totalvalue = 0;
-        for (int i = 0; i < productCount; i++) {
-            Totalvalue += prices[i] * quantities[i];
+        for (int i = 0; i < ProductCount; i++) {
+            Totalvalue += Prices[i] * Quantities[i];
         }
     }
 
     // Print Bill
     void PrintBill() {
-        if (productCount == 0) {
-            cout << "\nNo products to display.\n";
+        if (ProductCount == 0) {
+            cout << "\nNo Products to display.\n";
             return;
         }
         cout << "\n--- Bill Summary ---\n";
@@ -67,12 +67,12 @@ public:
              << setw(10) << "Total\n";
         cout << "------------------------------------------------------------\n";
 
-        for (int i = 0; i < productCount; i++) {
-            cout << left << setw(10) << product[i]
-                 << setw(15) << names[i]
-                 << setw(10) << quantities[i]
-                 << setw(10) << prices[i]
-                 << setw(10) << (prices[i] * quantities[i]) 
+        for (int i = 0; i < ProductCount; i++) {
+            cout << left << setw(10) << Product[i]
+                 << setw(15) << Names[i]
+                 << setw(10) << Quantities[i]
+                 << setw(10) << Prices[i]
+                 << setw(10) << (Prices[i] * Quantities[i]) 
                  << endl;
         }
 
@@ -82,8 +82,8 @@ public:
 };
 
 int main() {
-    int pid, price;
-    string name;
+    int Pid, Price;
+    string Name;
     Inventory inventory;
     int choice;
 
@@ -104,16 +104,16 @@ int main() {
         switch (choice) {
             case 1:
                 cout << "Enter Product ID: ";
-                cin >> pid;
+                cin >> Pid;
 
                 cout << "Enter Product Name: ";
                 cin.ignore();
-                getline(cin, name);
+                getline(cin, Name);
 
                 cout << "Enter Product Price: ";
-                cin >> price;
+                cin >> Price;
 
-                inventory.addOrUpdate(pid, name, price);
+                inventory.AddOrUpdate(Pid, Name, Price);
                 break;
 
             /*case 2:
@@ -130,6 +130,8 @@ int main() {
                 break;
         }
     } while (choice != 0);
+
+    cout << "24CE014 JAYRAJSINH BHATTI";
 
     return 0;
 }

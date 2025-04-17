@@ -4,7 +4,7 @@ using namespace std;
 
 class LoanDetails
 {
-    string name;
+    string Name;
     float TotalLoanAmount, LoanTenure, InterestRate;
 
     public:
@@ -12,7 +12,7 @@ class LoanDetails
     void AddDetails()
     {
         cout<<"Enter Name of Loan appplicant: ";
-        cin>>name;
+        cin>>Name;
         cout<<"Enter Total Loan Amount: ";
         cin>>TotalLoanAmount;
         cout<<"Enter Loan Tenure(*in months): ";
@@ -34,7 +34,7 @@ class LoanDetails
 
     void DisplayDetails(float EMI)
     {
-        cout<<"Name of Applicant: "<<name<< " || " << "Total Loan Amount: "<<TotalLoanAmount << " || " << "Loan Tenure(in months): "<<LoanTenure << " || "<<"Interest Rate(per annum): "<<InterestRate*12*100<<"%" <<" || " <<"EMI: "<<EMI<<endl<<endl;
+        cout<<"Name of Applicant: "<<Name<< " || " << "Total Loan Amount: "<<TotalLoanAmount << " || " << "Loan Tenure(in months): "<<LoanTenure << " || "<<"Interest Rate(per annum): "<<InterestRate*12*100<<"%" <<" || " <<"EMI: "<<EMI<<endl<<endl;
     }
 };
 
@@ -62,7 +62,7 @@ int main()
         }
 
     } while (choice!=0);
-    cout<<"24CE014";
+    cout<<"24CE014 JAYRaJSiNH BHATTI";
 
     return 0;
 }

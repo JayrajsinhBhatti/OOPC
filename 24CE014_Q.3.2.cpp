@@ -10,12 +10,12 @@ class SumAlgorithms {
     }
 
     int SumIterative(int arr[], int n) {
-        int sum = 0;
+        int Sum = 0;
         for(int i=0;i<n;i++)
         {
-            sum += arr[i];
+            Sum += arr[i];
         }
-        return sum;
+        return Sum;
     }
 };
 
@@ -41,5 +41,6 @@ int main()
     cout<<Recursive<<endl;
     cout<<Iterative<<endl;
 
+    cout << "24CE014 JAYRAJSINH BHATTI";
     return 0;
 }

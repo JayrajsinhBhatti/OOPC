@@ -5,27 +5,25 @@
 
     class GradingSystem {
     protected:
-        int marks;
+        int Marks;
 
     public:
         GradingSystem(int m){
-            marks = m;
+            Marks = m;
         }
 
-        virtual void computeGrade() = 0;
-
-        virtual ~GradingSystem() {}
+        virtual void ComputeGrade() = 0;
     };
 
     class Undergraduate : public GradingSystem {
     public:
         Undergraduate(int m) : GradingSystem(m) {}
 
-        void computeGrade() override {
+        void ComputeGrade() override {
             char grade;
-            if (marks >= 90) grade = 'A';
-            else if (marks >= 75) grade = 'B';
-            else if (marks >= 50) grade = 'C';
+            if (Marks >= 90) grade = 'A';
+            else if (Marks >= 75) grade = 'B';
+            else if (Marks >= 50) grade = 'C';
             else grade = 'F';
 
             cout << "Undergraduate Grade: " << grade << endl;
@@ -36,11 +34,11 @@
     public:
         Postgraduate(int m) : GradingSystem(m) {}
 
-        void computeGrade() override {
+        void ComputeGrade() override {
             char grade;
-            if (marks >= 85) grade = 'A';
-            else if (marks >= 70) grade = 'B';
-            else if (marks >= 55) grade = 'C';
+            if (Marks >= 85) grade = 'A';
+            else if (Marks >= 70) grade = 'B';
+            else if (Marks >= 55) grade = 'C';
             else grade = 'F';
 
             cout << "Postgraduate Grade: " << grade << endl;
@@ -57,22 +55,22 @@
 
             switch (choice) {
                 case 1: {
-                    int marks;
+                    int Marks;
                     cout << "Enter Undergraduate Marks: ";
-                    cin >> marks;
-                    students.push_back(new Undergraduate(marks));
+                    cin >> Marks;
+                    students.push_back(new Undergraduate(Marks));
                     break;
                 }
                 case 2: {
-                    int marks;
+                    int Marks;
                     cout << "Enter Postgraduate Marks: ";
-                    cin >> marks;
-                    students.push_back(new Postgraduate(marks));
+                    cin >> Marks;
+                    students.push_back(new Postgraduate(Marks));
                     break;
                 }
                 case 3:
                     for (auto student : students) {
-                        student->computeGrade();
+                        student->ComputeGrade();
                     }
                     break;
                 case 0:

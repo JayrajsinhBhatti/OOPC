@@ -5,7 +5,7 @@ using namespace std;
 class Employee
 {
     string Name;
-    int salary, bonus, TotalSalary, DefaultBonus = 15000;
+    int Salary, Bonus, TotalSalary, DefaultBonus = 15000;
     string BonusChoice;
 
     public: 
@@ -13,26 +13,26 @@ class Employee
         cout<<"Enter Employee name: ";
         cin>>Name;
         cout<<"Enter Salary: ";
-        cin>>salary;
+        cin>>Salary;
 
         cout<<"Employee have a customized BONUS?: (yes/no)";
         cin>>BonusChoice;
         if (BonusChoice == "yes")
         {
             cout<<"Enter Bonus: ";
-            cin>>bonus;
+            cin>>Bonus;
         } else {
-            bonus = DefaultBonus;
+            Bonus = DefaultBonus;
         }
         CountSalary();
     }
 
     inline void CountSalary() {
-        TotalSalary = salary + bonus;
+        TotalSalary = Salary + Bonus;
     }
 
     void ShowEmployeeData() const{
-        cout << "Name: " << Name << ", Salary: " << TotalSalary << ", Bonus: " << bonus << ", Total: " << TotalSalary << endl;
+        cout << "Name: " << Name << ", Bonus: " << Bonus << ", Total: " << TotalSalary << endl;
     }
 };
 
@@ -55,6 +55,6 @@ int main()
     {
         e.ShowEmployeeData();
     }
-    
+    cout << "24CE014 JAYRAJSINH BHATTI";
     return 0;
 }

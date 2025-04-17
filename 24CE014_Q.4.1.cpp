@@ -6,25 +6,25 @@ using namespace std;
 
 class Shape {
     public:
-    float radius;
+    float Radius;
 
     void getRadius() {
         cout<<"Enter Radius of circle: ";
-        cin>>radius;
+        cin>>Radius;
     }
 
 };
 
 class Circle: public Shape {
-    float area;
+    float Area;
 
     public:
     void CalculateArea() {
-        area = M_PI*radius*radius;
+        Area = M_PI*Radius*Radius;
     }
 
     void DisplayArea() {
-        cout<<"Calculated Area: "<<area<<endl;
+        cout<<"Calculated Area: "<<Area<<endl;
     }
 };
 

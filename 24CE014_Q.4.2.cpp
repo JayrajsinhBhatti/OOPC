@@ -11,14 +11,14 @@ protected:
 public:
     Person() {}
 
-    void inputPerson() {
+    void InputPerson() {
         cout << "Enter your name: ";
         cin >> Name;
         cout << "Enter your age: ";
         cin >> Age;
     }
 
-    void displayPerson() const {
+    void DisplayPerson() const {
         cout << "Name: " << Name << ", Age: " << Age << endl;
     }
 };
@@ -30,18 +30,18 @@ protected:
 public:
     Employee() {}
 
-    void inputEmployee() {
-        inputPerson();
+    void InputEmployee() {
+        InputPerson();
         cout << "Enter Employee ID: ";
         cin >> ID;
     }
 
-    void displayEmployee() const {
-        displayPerson();
+    void DisplayEmployee() const {
+        DisplayPerson();
         cout << "Employee ID: " << ID << endl;
     }
 
-    int getID() const {
+    int GetID() const {
         return ID;
     }
 };
@@ -52,14 +52,14 @@ class Manager : public Employee {
 public:
     Manager() {}
 
-    void inputManager() {
-        inputEmployee();
+    void InputManager() {
+        InputEmployee();
         cout << "Enter Department: ";
         cin >> Department;
     }
 
-    void displayManager() const {
-        displayEmployee();
+    void DisplayManager() const {
+        DisplayEmployee();
         cout << "Department: " << Department << endl;
         cout << "--------------------------" << endl;
     }
@@ -83,7 +83,7 @@ int main() {
             }
             {
                 Manager m;
-                m.inputManager();
+                m.InputManager();
                 managerVector.push_back(m);
                 managerArray[count] = m;
                 count++;
@@ -92,7 +92,7 @@ int main() {
 
         case 2:
             for (const auto& m : managerVector) {
-                m.displayManager();
+                m.DisplayManager();
             }
             break;
 
@@ -102,8 +102,8 @@ int main() {
             cin >> id;
             bool found = false;
             for (int i = 0; i < count; ++i) {
-                if (managerArray[i].getID() == id) {
-                    managerArray[i].displayManager();
+                if (managerArray[i].GetID() == id) {
+                    managerArray[i].DisplayManager();
                     found = true;
                     break;
                 }
@@ -125,6 +125,7 @@ int main() {
 
     } while (choice != 0);
 
+    cout << "24CE014 JAYRAJSINH BHATTI";
     return 0;
 }
 

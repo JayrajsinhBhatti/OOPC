@@ -4,14 +4,14 @@
 using namespace std;
 
 class SuperDigit {
-    string res = "";
+    string Res = "";
 
 public:
     long long GenerateNum(int Number, int k) {
         for (int i = 0; i < k; i++) {
-            res += to_string(Number);
+            Res += to_string(Number);
         }
-        long long conc_num = stoll(res);
+        long long conc_num = stoll(Res);
         return conc_num;
     }
 
@@ -40,8 +40,9 @@ int main() {
 
     SuperDigit sd;
     long long GenNum = sd.GenerateNum(Number, k);
-    int res = sd.GetSuperNum(GenNum);
-    cout << "Result: " << res << endl;
+    int Res = sd.GetSuperNum(GenNum);
+    cout << "Result: " << Res << endl;
 
+    cout << "24CE014 JAYRAJSINH BHATTI";
     return 0;
 }

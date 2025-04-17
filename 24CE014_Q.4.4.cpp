@@ -5,39 +5,37 @@ using namespace std;
 
 class BankAccount {
 protected:
-    string accountNumber;
-    double balance;
+    string AccountNumber;
+    double Balance;
 
 public:
     BankAccount(string accNum, double initialBalance) {
-        accountNumber = accNum;
-        balance = initialBalance;
+        AccountNumber = accNum;
+        Balance = initialBalance;
     }
 
-    virtual void deposit(double amount) {
-        balance += amount;
+    virtual void Deposit(double amount) {
+        Balance += amount;
         cout << "Deposited: " << amount << endl;
     }
 
-    virtual void withdraw(double amount) {
-        if (amount <= balance) {
-            balance -= amount;
+    virtual void Withdraw(double amount) {
+        if (amount <= Balance) {
+            Balance -= amount;
             cout << "Withdrew: " << amount << endl;
         } else {
-            cout << "Insufficient balance!" << endl;
+            cout << "Insufficient Balance!" << endl;
         }
     }
 
-    virtual void displayAccountDetails() const {
-        cout << "Account Number: " << accountNumber << endl;
-        cout << "Balance: " << balance << endl;
+    virtual void DisplayAccountDetails() const {
+        cout << "Account Number: " << AccountNumber << endl;
+        cout << "Balance: " << Balance << endl;
     }
 
-    string getAccountNumber() const {
-        return accountNumber;
+    string GetAccountNumber() const {
+        return AccountNumber;
     }
-
-    virtual ~BankAccount() {}
 };
 
 class SavingsAccount : public BankAccount {
@@ -49,13 +47,13 @@ public:
         : BankAccount(accNum, initialBalance), interestRate(rate) {}
 
     void applyInterest() {
-        double interest = balance * (interestRate / 100);
-        balance += interest;
+        double interest = Balance * (interestRate / 100);
+        Balance += interest;
         cout << "Interest Applied: " << interest << endl;
     }
 
-    void displayAccountDetails() const override {
-        BankAccount::displayAccountDetails();
+    void DisplayAccountDetails() const override {
+        BankAccount::DisplayAccountDetails();
         cout << "Interest Rate: " << interestRate << "%" << endl;
     }
 };
@@ -68,17 +66,17 @@ public:
     CurrentAccount(string accNum, double initialBalance, double limit)
         : BankAccount(accNum, initialBalance), overdraftLimit(limit) {}
 
-    void withdraw(double amount) override {
-        if (amount <= balance + overdraftLimit) {
-            balance -= amount;
+    void Withdraw(double amount) override {
+        if (amount <= Balance + overdraftLimit) {
+            Balance -= amount;
             cout << "Withdrew: " << amount << endl;
         } else {
             cout << "Overdraft limit exceeded!" << endl;
         }
     }
 
-    void displayAccountDetails() const override {
-        BankAccount::displayAccountDetails();
+    void DisplayAccountDetails() const override {
+        BankAccount::DisplayAccountDetails();
         cout << "Overdraft Limit: " << overdraftLimit << endl;
     }
 };
@@ -116,7 +114,7 @@ public:
 // Helper function to find an account by account number
 BankAccount* findAccount(const vector<BankAccount*>& accounts, const string& accNum) {
     for (BankAccount* acc : accounts) {
-        if (acc->getAccountNumber() == accNum) {
+        if (acc->GetAccountNumber() == accNum) {
             return acc;
         }
     }
@@ -132,38 +130,38 @@ int main() {
         cout << "\n1. Add Savings Account\n2. Add Current Account\n3. Deposit\n4. Withdraw\n5. Apply Interest (Savings)\n6. Undo Last Transaction\n7. Display Account Details\n8. Display Transaction History\n0. Exit\nEnter choice: ";
         cin >> choice;
 
-        string accountNumber;
+        string AccountNumber;
         double amount, rate, limit;
 
         switch (choice) {
             case 1:
                 cout << "Enter account number: ";
-                cin >> accountNumber;
-                cout << "Enter initial balance: ";
+                cin >> AccountNumber;
+                cout << "Enter initial Balance: ";
                 cin >> amount;
                 cout << "Enter interest rate: ";
                 cin >> rate;
-                accounts.push_back(new SavingsAccount(accountNumber, amount, rate));
+                accounts.push_back(new SavingsAccount(AccountNumber, amount, rate));
                 break;
 
             case 2:
                 cout << "Enter account number: ";
-                cin >> accountNumber;
-                cout << "Enter initial balance: ";
+                cin >> AccountNumber;
+                cout << "Enter initial Balance: ";
                 cin >> amount;
                 cout << "Enter overdraft limit: ";
                 cin >> limit;
-                accounts.push_back(new CurrentAccount(accountNumber, amount, limit));
+                accounts.push_back(new CurrentAccount(AccountNumber, amount, limit));
                 break;
 
             case 3:
                 cout << "Enter account number: ";
-                cin >> accountNumber;
-                cout << "Enter deposit amount: ";
+                cin >> AccountNumber;
+                cout << "Enter Deposit amount: ";
                 cin >> amount;
-                if (BankAccount* acc = findAccount(accounts, accountNumber)) {
-                    acc->deposit(amount);
-                    history.addTransaction("Deposited " + to_string(amount) + " to " + accountNumber);
+                if (BankAccount* acc = findAccount(accounts, AccountNumber)) {
+                    acc->Deposit(amount);
+                    history.addTransaction("Deposited " + to_string(amount) + " to " + AccountNumber);
                 } else {
                     cout << "Account not found!" << endl;
                 }
@@ -171,12 +169,12 @@ int main() {
 
             case 4:
                 cout << "Enter account number: ";
-                cin >> accountNumber;
-                cout << "Enter withdrawal amount: ";
+                cin >> AccountNumber;
+                cout << "Enter Withdrawal amount: ";
                 cin >> amount;
-                if (BankAccount* acc = findAccount(accounts, accountNumber)) {
-                    acc->withdraw(amount);
-                    history.addTransaction("Withdrew " + to_string(amount) + " from " + accountNumber);
+                if (BankAccount* acc = findAccount(accounts, AccountNumber)) {
+                    acc->Withdraw(amount);
+                    history.addTransaction("Withdrew " + to_string(amount) + " from " + AccountNumber);
                 } else {
                     cout << "Account not found!" << endl;
                 }
@@ -184,12 +182,12 @@ int main() {
 
             case 5:
                 cout << "Enter account number: ";
-                cin >> accountNumber;
-                if (BankAccount* acc = findAccount(accounts, accountNumber)) {
+                cin >> AccountNumber;
+                if (BankAccount* acc = findAccount(accounts, AccountNumber)) {
                     SavingsAccount* savingsAcc = dynamic_cast<SavingsAccount*>(acc);
                     if (savingsAcc) {
                         savingsAcc->applyInterest();
-                        history.addTransaction("Applied interest to " + accountNumber);
+                        history.addTransaction("Applied interest to " + AccountNumber);
                     } else {
                         cout << "Not a savings account!" << endl;
                     }
@@ -204,9 +202,9 @@ int main() {
 
             case 7:
                 cout << "Enter account number: ";
-                cin >> accountNumber;
-                if (BankAccount* acc = findAccount(accounts, accountNumber)) {
-                    acc->displayAccountDetails();
+                cin >> AccountNumber;
+                if (BankAccount* acc = findAccount(accounts, AccountNumber)) {
+                    acc->DisplayAccountDetails();
                 } else {
                     cout << "Account not found!" << endl;
                 }
@@ -230,5 +228,6 @@ int main() {
         delete acc;
     }
 
+    cout << "24CE014 JAYRAJSINH BHATTI";
     return 0;
 }

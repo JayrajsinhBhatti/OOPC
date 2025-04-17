@@ -2,43 +2,43 @@
 using namespace std;
 
 class Rectangle {
-    float length, breadth;
-    float newlength, newbreadth;
+    float Length, Breadth;
+    float NewLength, NewBreadth;
 
     public:
-    void disp() {
-        cout<<"Enter length:: ";
-        cin>>length;
-        cout<<"Enter breadth:: ";
-        cin>>breadth;
+    void Disp() {
+        cout<<"Enter Length:: ";
+        cin>>Length;
+        cout<<"Enter Breadth:: ";
+        cin>>Breadth;
     }
-    void result() {
-        cout<<"Area is: "<<length*breadth<<endl;
-        cout<<"Perimeter is: "<<2*(length+breadth)<<endl;
-    }
-
-    void update() {
-        cout<<"Enter new length:: ";
-        cin>>newlength;
-
-        cout<<"Enter new breadth:: ";
-        cin>>newbreadth;
-
-        cout<<"Old area: "<<length*breadth<<endl;
-        cout<<"Old perimeter: "<<2*(length+breadth)<<endl;
-
-        length = newlength;
-        breadth = newbreadth;
-
-        cout<<"Updated length is: "<<length<<endl;
-        cout<<"Updated breadth is: "<<breadth<<endl;
+    void Result() {
+        cout<<"Area is: "<<Length*Breadth<<endl;
+        cout<<"Perimeter is: "<<2*(Length+Breadth)<<endl;
     }
 
-    //void updatedArea() {
-        // cout<<"Area is: "<<newlength*newbreadth<<endl;
-        // cout<<"Area is: "<<2*(newlength+newbreadth)<<endl;
-    //    cout<<"Area is: "<<length*breadth<<endl;
-    //   cout<<"Perimeter is: "<<2*(length+breadth)<<endl;
+    void Update() {
+        cout<<"Enter new Length:: ";
+        cin>>NewLength;
+
+        cout<<"Enter new Breadth:: ";
+        cin>>NewBreadth;
+
+        cout<<"Old area: "<<Length*Breadth<<endl;
+        cout<<"Old perimeter: "<<2*(Length+Breadth)<<endl;
+
+        Length = NewLength;
+        Breadth = NewBreadth;
+
+        cout<<"Updated Length is: "<<Length<<endl;
+        cout<<"Updated Breadth is: "<<Breadth<<endl;
+    }
+
+    //void UpdatedArea() {
+        // cout<<"Area is: "<<NewLength*NewBreadth<<endl;
+        // cout<<"Area is: "<<2*(NewLength+NewBreadth)<<endl;
+    //    cout<<"Area is: "<<Length*Breadth<<endl;
+    //   cout<<"Perimeter is: "<<2*(Length+Breadth)<<endl;
     //}
 };
 int main()
@@ -46,19 +46,19 @@ int main()
     Rectangle r;
     int choice;
     do{
-        cout<<"Press 1 to enter,2 to update, 0 to exit :: ";
+        cout<<"Press 1 to enter,2 to Update, 0 to exit :: ";
         cin>>choice;
 
         if (choice==1)
         {
-            r.disp();
-            r.result();
+            r.Disp();
+            r.Result();
 
         }
         else if (choice==2)
         {
-            r.update();
-            r.result();
+            r.Update();
+            r.Result();
         }
         else if (choice==0)
         {
@@ -69,4 +69,6 @@ int main()
             cout<<"Incorrect input!"<<endl;
         }
     } while(choice!=0);
+
+    cout << "24CE014 JAYRAJSINH BHATTI";
 }

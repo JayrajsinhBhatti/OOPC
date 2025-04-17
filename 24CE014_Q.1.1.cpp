@@ -4,21 +4,21 @@ using namespace std;
 
 class BankAccount {
 private:
-    string accountHolderName;
-    int accountNumber;
-    double balance;
+    string AccountHolderName;
+    int AccountNumber;
+    double Balance;
 
 public:
     BankAccount(string name, int accNumber, double initialBalance) {
-        accountHolderName = name;
-        accountNumber = accNumber;
-        balance = initialBalance;
+        AccountHolderName = name;
+        AccountNumber = accNumber;
+        Balance = initialBalance;
     }
 
     void deposit(double amount) {
         if (amount > 0) {
-            balance += amount;
-            cout << "Deposit successful. New balance: " << balance << endl;
+            Balance += amount;
+            cout << "Deposit successful. New Balance: " << Balance << endl;
         } else {
             cout << "Invalid deposit amount." << endl;
         }
@@ -26,11 +26,11 @@ public:
 
     void withdraw(double amount) {
         if (amount > 0) {
-            if (amount <= balance) {
-                balance -= amount;
-                cout << "Withdrawal successful. New balance: " << balance << endl;
+            if (amount <= Balance) {
+                Balance -= amount;
+                cout << "Withdrawal successful. New Balance: " << Balance << endl;
             } else {
-                cout << "Insufficient balance. Withdrawal failed." << endl;
+                cout << "Insufficient Balance. Withdrawal failed." << endl;
             }
         } else {
             cout << "Invalid withdrawal amount." << endl;
@@ -38,30 +38,30 @@ public:
     }
 
     double getBalance() const {
-        return balance;
+        return Balance;
     }
 
     void displayAccountDetails() const {
-        cout << "Account Holder: " << accountHolderName << endl;
-        cout << "Account Number: " << accountNumber << endl;
-        cout << "Current Balance: " << balance << endl;
+        cout << "Account Holder: " << AccountHolderName << endl;
+        cout << "Account Number: " << AccountNumber << endl;
+        cout << "Current Balance: " << Balance << endl;
     }
 };
 
 int main() {
-    
+
     string name;
     int acc;
     double InitialBalance;
 
-    cout<<"Enter Name: ";
-    cin>>name;
-    cout<<"Enter account number: ";
-    cin>>acc;
-    cout<<"Enter initial Balance for deposit: ";
-    cin>>InitialBalance;
+    cout << "Enter Name: ";
+    cin >> name;
+    cout << "Enter account number: ";
+    cin >> acc;
+    cout << "Enter initial Balance for deposit: ";
+    cin >> InitialBalance;
 
-    BankAccount myAccount("Jayrajsinh Bhatti", 1001, 5000.00);
+    BankAccount myAccount(name, acc, InitialBalance); // ← now using user input
 
     int choice;
     double amount;
@@ -101,6 +101,8 @@ int main() {
         }
 
     } while (choice != 0);
+
+    cout << "24CE014 JAYRAJSINH BHATTI";
 
     return 0;
 }

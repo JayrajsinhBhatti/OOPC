@@ -3,50 +3,50 @@
 using namespace std;
 
 class Account_Details {
-    int account_number;
-    float current_balance = 0, withdraw_balance = 0, deposit_balance = 0;
-    string name;
+    int AccountNumber;
+    float CurrentBalance = 0, WithdrawBalance = 0, DepositBalance = 0;
+    string Name;
     
 public:
-    void create_account(int acc_no) {
+    void CreateAccount(int acc_no) {
         string choice;
-        account_number = acc_no;
-        cout << "Enter name: ";
-        cin >> name;
+        AccountNumber = acc_no;
+        cout << "Enter Name: ";
+        cin >> Name;
         cout << "Do you want to deposit amount in account? (yes/no): ";
         cin >> choice;
 
         if (choice == "yes" || choice == "Yes" || choice == "YES") {
-            deposit_money();
+            DepositMoney();
         }
         else {
             cout << "Account created!" << endl;
         }
     }
 
-    void deposit_money() {
+    void DepositMoney() {
         cout << "Enter amount to deposit: ";
-        cin >> deposit_balance;
-        current_balance += deposit_balance;
+        cin >> DepositBalance;
+        CurrentBalance += DepositBalance;
         cout << "Amount deposited!" << endl;
     }
 
-    void withdraw_money() {
+    void WithdrawMoney() {
         cout << "Enter amount to withdraw: ";
-        cin >> withdraw_balance;
-        if (withdraw_balance > current_balance) {
+        cin >> WithdrawBalance;
+        if (WithdrawBalance > CurrentBalance) {
             cout << "Insufficient balance!" << endl;
         } else {
-            current_balance -= withdraw_balance;
+            CurrentBalance -= WithdrawBalance;
             cout << "Amount debited!" << endl;
         }
     }
 
-    void display() {
-        cout << "\nAccount number: " << account_number << endl;
-        cout << "Amount credited (deposit): " << deposit_balance << endl;
-        cout << "Amount debited (withdrawn): " << withdraw_balance << endl;
-        cout << "Total balance: " << current_balance << endl;
+    void Display() {
+        cout << "\nAccount number: " << AccountNumber << endl;
+        cout << "Amount credited (deposit): " << DepositBalance << endl;
+        cout << "Amount debited (withdrawn): " << WithdrawBalance << endl;
+        cout << "Total balance: " << CurrentBalance << endl;
     }
 };
 
@@ -57,7 +57,7 @@ int main() {
     cout << "Enter account number: ";
     cin >> acc_no;
 
-    a.create_account(acc_no);
+    a.CreateAccount(acc_no);
 
     do {
         cout << "\nEnter:: \n 1-DEPOSIT \n 2-WITHDRAW \n 3-DISPLAY \n 4-EXIT" << endl;
@@ -65,13 +65,13 @@ int main() {
 
         switch (choice) {
             case 1:
-                a.deposit_money();
+                a.DepositMoney();
                 break;
             case 2:
-                a.withdraw_money();
+                a.WithdrawMoney();
                 break;
             case 3:
-                a.display();
+                a.Display();
                 break;
             case 4:
                 cout << "Exiting..." << endl;
@@ -82,4 +82,6 @@ int main() {
     } while (choice != 4);
 
     return 0;
+
+    cout << "24CE014 JAYRAJSINH BHATTI";
 }
