@@ -17,11 +17,13 @@
 
     class Undergraduate : public GradingSystem {
     public:
-        Undergraduate(int m) : GradingSystem(m) {}
+        Undergraduate(int m) : GradingSystem(m) {
 
-        void ComputeGrade() override {
+        }
+
+        void ComputeGrade() {
             char grade;
-            if (Marks >= 90) grade = 'A';
+            if (Marks >= 85) grade = 'A';
             else if (Marks >= 75) grade = 'B';
             else if (Marks >= 50) grade = 'C';
             else grade = 'F';
@@ -34,9 +36,9 @@
     public:
         Postgraduate(int m) : GradingSystem(m) {}
 
-        void ComputeGrade() override {
+        void ComputeGrade() {
             char grade;
-            if (Marks >= 85) grade = 'A';
+            if (Marks >= 90) grade = 'A';
             else if (Marks >= 70) grade = 'B';
             else if (Marks >= 55) grade = 'C';
             else grade = 'F';
@@ -82,9 +84,9 @@
 
         } while (choice != 0);
 
-        for (auto student : students) {
-            delete student;
-        }
+        // for (auto student : students) {
+        //     delete student;
+        // }
 
         cout<<"24CE014 JAYRAJSINH BHATTI";
 
