@@ -32,7 +32,10 @@ public:
     virtual void Withdraw(double amt) = 0;
     virtual void UndoLastTransaction() = 0;
     virtual void PrintHistory() = 0;
-    virtual int GetAccountNumber() { return AccountNumber; }
+
+    virtual int GetAccountNumber() { 
+        return AccountNumber; 
+    }
 
     void FileTransaction(string type, double amt, const string& filename) {
         ofstream file(filename, ios::app);
@@ -124,24 +127,24 @@ public:
         }
     }
 
-    static void ShowHistoryByAccountNumber(int accNo) {
-        ifstream file("savings_transactions.txt");
-        string type;
-        double amt, bal;
-        int acc;
-        bool found = false;
+    // static void ShowHistoryByAccountNumber(int accNo) {
+    //     ifstream file("savings_transactions.txt");
+    //     string type;
+    //     double amt, bal;
+    //     int acc;
+    //     bool found = false;
 
-        while (file >> acc >> type >> amt >> bal) {
-            if (acc == accNo) {
-                cout << "Type: " << type << " | Amount: " << amt << " | Balance: " << bal << endl;
-                found = true;
-            }
-        }
+    //     while (file >> acc >> type >> amt >> bal) {
+    //         if (acc == accNo) {
+    //             cout << "Type: " << type << " | Amount: " << amt << " | Balance: " << bal << endl;
+    //             found = true;
+    //         }
+    //     }
 
-        if (!found) {
-            cout << "No transactions found for savings account number " << accNo << ".\n";
-        }
-    }
+    //     if (!found) {
+    //         cout << "No transactions found for savings account number " << accNo << ".\n";
+    //     }
+    // }
 };
 
 class CurrentAccount : public BankAccount {
@@ -221,24 +224,24 @@ public:
         }
     }
 
-    static void ShowHistoryByAccountNumber(int accNo) {
-        ifstream file("current_transactions.txt");
-        string type;
-        double amt, bal;
-        int acc;
-        bool found = false;
+    // static void ShowHistoryByAccountNumber(int accNo) {
+    //     ifstream file("current_transactions.txt");
+    //     string type;
+    //     double amt, bal;
+    //     int acc;
+    //     bool found = false;
 
-        while (file >> acc >> type >> amt >> bal) {
-            if (acc == accNo) {
-                cout << "Type: " << type << " | Amount: " << amt << " | Balance: " << bal << endl;
-                found = true;
-            }
-        }
+    //     while (file >> acc >> type >> amt >> bal) {
+    //         if (acc == accNo) {
+    //             cout << "Type: " << type << " | Amount: " << amt << " | Balance: " << bal << endl;
+    //             found = true;
+    //         }
+    //     }
 
-        if (!found) {
-            cout << "No transactions found for current account number " << accNo << ".\n";
-        }
-    }
+    //     if (!found) {
+    //         cout << "No transactions found for current account number " << accNo << ".\n";
+    //     }
+    // }
 };
 
 int main() {
@@ -258,7 +261,7 @@ int main() {
         cout << "4. Withdraw Money\n";
         cout << "5. Show Transaction History (Current Account)\n";
         cout << "6. Show Transaction History (Savings Account)\n";
-        cout << "7. Show Transaction History by Account Number\n";
+        //cout << "7. Show Transaction History by Account Number\n";
         cout << "8. Undo Last Transaction\n";
         cout << "0. Exit\n";
         cout << "Enter your choice: ";
@@ -329,7 +332,7 @@ int main() {
                 cout << "No savings account exists.\n";
             break;
 
-        case 7:
+        /*case 7:
             cout << "Enter account number: ";
             cin >> accNo;
             cout << "Is this 1. Savings or 2. Current account? ";
@@ -340,7 +343,7 @@ int main() {
                 CurrentAccount::ShowHistoryByAccountNumber(accNo);
             else
                 cout << "Invalid type.\n";
-            break;
+            break;*/
             
         case 8:
             cout << "Undo transaction for: 1. Savings  2. Current : ";
