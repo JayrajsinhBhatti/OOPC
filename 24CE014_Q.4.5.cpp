@@ -15,7 +15,7 @@
         virtual void ComputeGrade() = 0;
     };
 
-    class Undergraduate : public GradingSystem {
+    class Undergraduate : public GradingSystem { //initializer list
     public:
         Undergraduate(int m) : GradingSystem(m) {
 
@@ -58,14 +58,14 @@
             switch (choice) {
                 case 1: {
                     int Marks;
-                    cout << "Enter Undergraduate Marks: ";
+                    cout << "Enter Undergraduate Total Marks: ";
                     cin >> Marks;
                     students.push_back(new Undergraduate(Marks));
                     break;
                 }
                 case 2: {
                     int Marks;
-                    cout << "Enter Postgraduate Marks: ";
+                    cout << "Enter Postgraduate Total Marks: ";
                     cin >> Marks;
                     students.push_back(new Postgraduate(Marks));
                     break;
@@ -84,9 +84,9 @@
 
         } while (choice != 0);
 
-        // for (auto student : students) {
-        //     delete student;
-        // }
+        for (auto student : students) {
+            delete student;
+        }
 
         cout<<"24CE014 JAYRAJSINH BHATTI";
 
