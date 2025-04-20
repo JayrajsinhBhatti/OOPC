@@ -7,20 +7,30 @@ class BankAccount {
 protected:
     int AccountNumber;
     double Balance;
+    double LastAmount;
+    string LastTransactionType;
+    bool HasLastTransaction;
 
 public:
     BankAccount() {
         AccountNumber = 0;
         Balance = 0.0;
+        LastAmount = 0.0;
+        LastTransactionType = "";
+        HasLastTransaction = false;
     }
 
     BankAccount(int accNo, double bal) {
         AccountNumber = accNo;
         Balance = bal;
+        LastAmount = 0.0;
+        LastTransactionType = "";
+        HasLastTransaction = false;
     }
 
     virtual void Deposit(double amt) = 0;
     virtual void Withdraw(double amt) = 0;
+    virtual void UndoLastTransaction() = 0;
     virtual void PrintHistory() = 0;
     virtual int GetAccountNumber() { return AccountNumber; }
 
@@ -49,10 +59,16 @@ public:
         AccountNumber = accNo;
         Balance = bal;
         InterestRate = interest;
+        LastAmount = 0.0;
+        LastTransactionType = "";
+        HasLastTransaction = false;
     }
 
     void Deposit(double amt) override {
         Balance += amt;
+        LastAmount = amt;
+        LastTransactionType = "Deposit";
+        HasLastTransaction = true;
         FileTransaction("Deposit", amt, "savings_transactions.txt");
         cout << "Amount credited to savings account!\n";
     }
@@ -60,11 +76,33 @@ public:
     void Withdraw(double amt) override {
         if (Balance >= amt) {
             Balance -= amt;
+            LastAmount = amt;
+            LastTransactionType = "Withdraw";
+            HasLastTransaction = true;
             FileTransaction("Withdraw", amt, "savings_transactions.txt");
             cout << "Amount debited from savings account!\n";
         } else {
             cout << "Insufficient balance in savings account!\n";
         }
+    }
+
+    void UndoLastTransaction() override {
+        if (!HasLastTransaction) {
+            cout << "No transaction to undo!\n";
+            return;
+        }
+
+        if (LastTransactionType == "Deposit") {
+            Balance -= LastAmount;
+            FileTransaction("UndoDeposit", LastAmount, "savings_transactions.txt");
+            cout << "Last deposit undone. Amount " << LastAmount << " debited from savings account!\n";
+        } else if (LastTransactionType == "Withdraw") {
+            Balance += LastAmount;
+            FileTransaction("UndoWithdraw", LastAmount, "savings_transactions.txt");
+            cout << "Last withdrawal undone. Amount " << LastAmount << " credited to savings account!\n";
+        }
+        
+        HasLastTransaction = false;
     }
 
     void PrintHistory() override {
@@ -118,10 +156,16 @@ public:
         AccountNumber = accNo;
         Balance = bal;
         OverDraftLmt = limit;
+        LastAmount = 0.0;
+        LastTransactionType = "";
+        HasLastTransaction = false;
     }
 
     void Deposit(double amt) override {
         Balance += amt;
+        LastAmount = amt;
+        LastTransactionType = "Deposit";
+        HasLastTransaction = true;
         FileTransaction("Deposit", amt, "current_transactions.txt");
         cout << "Amount credited to current account!\n";
     }
@@ -129,11 +173,33 @@ public:
     void Withdraw(double amt) override {
         if (amt <= Balance + OverDraftLmt) {
             Balance -= amt;
+            LastAmount = amt;
+            LastTransactionType = "Withdraw";
+            HasLastTransaction = true;
             FileTransaction("Withdraw", amt, "current_transactions.txt");
             cout << "Amount debited from current account!\n";
         } else {
             cout << "Overdraft limit exceeded!\n";
         }
+    }
+
+    void UndoLastTransaction() override {
+        if (!HasLastTransaction) {
+            cout << "No transaction to undo!\n";
+            return;
+        }
+
+        if (LastTransactionType == "Deposit") {
+            Balance -= LastAmount;
+            FileTransaction("UndoDeposit", LastAmount, "current_transactions.txt");
+            cout << "Last deposit undone. Amount " << LastAmount << " debited from current account!\n";
+        } else if (LastTransactionType == "Withdraw") {
+            Balance += LastAmount;
+            FileTransaction("UndoWithdraw", LastAmount, "current_transactions.txt");
+            cout << "Last withdrawal undone. Amount " << LastAmount << " credited to current account!\n";
+        }
+        
+        HasLastTransaction = false;
     }
 
     void PrintHistory() override {
@@ -193,6 +259,7 @@ int main() {
         cout << "5. Show Transaction History (Current Account)\n";
         cout << "6. Show Transaction History (Savings Account)\n";
         cout << "7. Show Transaction History by Account Number\n";
+        cout << "8. Undo Last Transaction\n";
         cout << "0. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -274,6 +341,17 @@ int main() {
             else
                 cout << "Invalid type.\n";
             break;
+            
+        case 8:
+            cout << "Undo transaction for: 1. Savings  2. Current : ";
+            cin >> choice;
+            if (choice == 1 && hasSavings)
+                sa.UndoLastTransaction();
+            else if (choice == 2 && hasCurrent)
+                ca.UndoLastTransaction();
+            else
+                cout << "Account not available.\n";
+            break;
 
         case 0:
             cout << "Exiting...\n";
@@ -285,5 +363,6 @@ int main() {
 
     } while (choice != 0);
 
+    cout<<"24CE014 JAYRAJSINH BHATTI";
     return 0;
 }
