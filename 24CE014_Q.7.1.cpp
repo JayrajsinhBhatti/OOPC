@@ -1,29 +1,39 @@
 #include<iostream>
-#include<vector>
+#include<map>
+#include<sstream>
 #include<string>
 using namespace std;
 
 class WordFrequency {
+    map<string, int> word;
     public:
     void CountFreq(string str) {
+        stringstream ss(str);
+        string w;
 
+        while (ss >> w)
+        {
+            word[w]++;
+        }
+        
+    }
+    void print() {
+        for(const auto &w: word) {
+            cout << w.first << " : " << w.second << endl;
+        }
     }
 };
 
 int main()
 {
-    vector<string> words;
-    vector<int> count;
-    string str;
-
+    string Paragraph;
     cout<<"Enter paragraph: ";
-    cin>>str;
-    string *strptr = str;
+    getline(cin, Paragraph);
 
-    for(int i=0; i<str.length(); i++) {
-        
-    }
     WordFrequency wf;
-    wf.CountFreq(str);
+    wf.CountFreq(Paragraph);
+    wf.print();
+
+    cout<<"24CE014 Jayrajsinh Bhatti";
     return 0;
 }
