@@ -2,37 +2,57 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+using namespace std;
 
-void ShowReport(const std::string& FileName) {
-    std::ifstream File(FileName);
-    if (!File) {
-        std::cout << "Error: Cannot open file.\n";
-        return;
+class StudentReport {
+private:
+    string fileName;
+
+    // User-defined manipulator for fixed-width column
+    static ostream& Col(ostream& Os) {
+        return Os << left << setw(20);
     }
 
-    std::string Name;
-    int Marks;
-    char Grade;
+public:
+    // Constructor to initialize the file name
+    StudentReport(const string& file) : fileName(file) {}
 
-    std::cout << "\n=== Student Report ===\n";
-    std::cout << std::left << std::setw(20) << "Name"
-              << std::setw(10) << "Marks"
-              << std::setw(10) << "Grade" << "\n";
-    std::cout << "-------------------------------\n";
+    // Function to generate the student performance report
+    void GenerateReport() const {
+        ifstream inputFile(fileName);
+        if (!inputFile.is_open()) {
+            cerr << "Error: Could not open file '" << fileName << "'.\n";
+            return;
+        }
 
-    while (std::getline(File, Name, ',')) {
-        File >> Marks >> Grade;
-        File.ignore();
-        std::cout << std::left << std::setw(20) << Name
-                  << std::setw(10) << Marks
-                  << std::setw(10) << Grade << "\n";
+        string studentName;
+        int studentMarks;
+        char studentGrade;
+
+        cout << "\n===== STUDENT PERFORMANCE REPORT =====\n";
+        cout << Col << "Name"
+                  << setw(10) << "Marks"
+                  << setw(10) << "Grade" << "\n";
+        cout << string(40, '-') << "\n";
+
+        while (inputFile >> ws && getline(inputFile, studentName, ',')) {
+            inputFile >> studentMarks >> studentGrade;
+            inputFile.ignore();  // Skip newline or trailing whitespace
+
+            cout << Col << studentName
+                      << setw(10) << studentMarks
+                      << setw(10) << studentGrade << "\n";
+        }
+
+        inputFile.close();
+        cout << "======================================\n";
     }
-
-    File.close();
-}
+};
 
 int main() {
-    std::string FileName = "students.txt";
-    ShowReport(FileName);
+    const string fileName = "students.txt";
+    StudentReport report(fileName);
+    report.GenerateReport();
+    cout<<"24CE014 JAYRAJSINH BHATTI";
     return 0;
 }
