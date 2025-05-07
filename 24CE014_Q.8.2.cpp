@@ -5,29 +5,33 @@
 
 using namespace std;
 
-void CountWordFrequency(string& text) {
-    map<string, int> wordCount;
-    stringstream ss(text);
-    string word;
+class WordFrequencyCounter {
+public:
+    void countFrequency(const string& text) {
+        map<string, int> wordCount;
+        stringstream ss(text);
+        string word;
 
-    while (ss >> word) {
-        ++wordCount[word];
-    }
+        while (ss >> word) {
+            ++wordCount[word];
+        }
 
-    cout << "\nWord Frequency:\n";
-    for (auto it = wordCount.begin(); it != wordCount.end(); ++it) {
-        cout << it->first << ": " << it->second << endl;
+        cout << "\nWord Frequency:\n";
+        for (const auto& pair : wordCount) {
+            cout << pair.first << ": " << pair.second << endl;
+        }
     }
-}
+};
 
 int main() {
     string inputText;
+    WordFrequencyCounter counter;
 
     cout << "Enter a sentence:\n";
     getline(cin, inputText);
 
-    CountWordFrequency(inputText);
+    counter.countFrequency(inputText);
 
-    cout<<"\n24CE014 JAYRAJSINH BHATTI";
+    cout << "\n24CE014 JAYRAJSINH BHATTI\n";
     return 0;
 }
