@@ -1,52 +1,37 @@
 #include <iostream>
+#include <map>
 #include <sstream>
+#include <string>
 
 using namespace std;
 
-bool isValidNumber(const string& str) {
-    stringstream ss(str);
-    double num;
-    ss >> num;
-    if (!ss.fail() && ss.eof())
-    {
-        return true;
-    } else {
-        return false;
+class WordFrequencyCounter {
+public:
+    void countFrequency(const string& text) {
+        map<string, int> wordCount;
+        stringstream ss(text);
+        string word;
+
+        while (ss >> word) {
+            ++wordCount[word];
+        }
+
+        cout << "\nWord Frequency:\n";
+        for (const auto& pair : wordCount) {
+            cout << pair.first << ": " << pair.second << endl;
+        }
     }
-}
+};
 
 int main() {
-    double LoanAmount, AnnualIncome;
-    string input;
+    string inputText;
+    WordFrequencyCounter counter;
 
-    do {
-        cout << "Enter the total loan amount you want to apply for: ";
-        getline(cin, input);
-        
-        if (!isValidNumber(input)) {
-            cout << "Error: Please enter a valid numerical value for loan amount.\n";
-            continue;
-        }
-        LoanAmount = stod(input);
+    cout << "Enter a sentence:\n";
+    getline(cin, inputText);
 
-        cout << "Enter your annual income: ";
-        getline(cin, input);
-        
-        if (!isValidNumber(input)) {
-            cout << "Error: Please enter a valid numerical value for annual income.\n";
-            continue;
-        }
-        AnnualIncome = stod(input);
+    counter.countFrequency(inputText);
 
-        if (LoanAmount <= 0 || AnnualIncome <= 0) {
-            cout << "Error: Loan amount and annual income must both be greater than 0.\nPlease try again.\n\n";
-        }
-
-    } while (LoanAmount <= 0 || AnnualIncome <= 0);
-
-    double ratio = LoanAmount / AnnualIncome;
-
-    cout << "Your Loan-to-Income Ratio is: " << ratio << endl;
-    cout<<"\n24CE014 JAYRAJSINH BHATTI";
+    cout << "\n24CE014 JAYRAJSINH BHATTI\n";
     return 0;
 }
