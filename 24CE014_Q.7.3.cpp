@@ -44,58 +44,62 @@ public:
     }
 };
 
-void AddItem() {
-    Item item;
-    item.GetDetails();
-    item.SaveToFile();
-    cout << "Item added successfully.\n";
-}
-
-void CheckInventory() {
-    ifstream file("inventory.txt");
-    if (!file) {
-        cout << "No inventory found.\n";
-        return;
+class InventoryManager {
+public:
+    void AddItem() {
+        Item item;
+        item.GetDetails();
+        item.SaveToFile();
+        cout << "Item added successfully.\n";
     }
 
-    Item item;
-    cout << "\nInventory:\n";
-    while (item.LoadFromFile(file)) {
-        item.Display();
-    }
-    file.close();
-}
-
-void SearchItem() {
-    char searchName[50];
-    cout << "Enter item Name to search: ";
-    cin >> searchName;
-
-    ifstream file("inventory.txt");
-    if (!file) {
-        cout << "No inventory found.\n";
-        return;
-    }
-
-    Item item;
-    bool found = false;
-    while (item.LoadFromFile(file)) {
-        if (item.Search(searchName)) {
-            cout << "Found item:\n";
-            item.Display();
-            found = true;
-            break;
+    void CheckInventory() {
+        ifstream file("inventory.txt");
+        if (!file) {
+            cout << "No inventory found.\n";
+            return;
         }
+
+        Item item;
+        cout << "\nInventory:\n";
+        while (item.LoadFromFile(file)) {
+            item.Display();
+        }
+        file.close();
     }
 
-    if (!found) {
-        cout << "Item not found.\n";
-    }
+    void SearchItem() {
+        char searchName[50];
+        cout << "Enter item Name to search: ";
+        cin >> searchName;
 
-    file.close();
-}
+        ifstream file("inventory.txt");
+        if (!file) {
+            cout << "No inventory found.\n";
+            return;
+        }
+
+        Item item;
+        bool found = false;
+        while (item.LoadFromFile(file)) {
+            if (item.Search(searchName)) {
+                cout << "Found item:\n";
+                item.Display();
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            cout << "Item not found.\n";
+        }
+
+        file.close();
+    }
+};
 
 int main() {
+    InventoryManager manager;
     int Choice;
 
     do {
@@ -105,17 +109,18 @@ int main() {
 
         switch (Choice) {
             case 1: 
-                AddItem(); break;
+                manager.AddItem(); break;
             case 2: 
-                CheckInventory(); break;
+                manager.CheckInventory(); break;
             case 3: 
-                SearchItem(); break;
+                manager.SearchItem(); break;
             case 0: 
                 cout << "Exiting...\n"; break;
             default: 
                 cout << "Invalid Choice.\n";
         }
     } while (Choice != 0);
+
     cout << "\n24CE014 JAYRAJSINH BHATTI\n";
     return 0;
 }
