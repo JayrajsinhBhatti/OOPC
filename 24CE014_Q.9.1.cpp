@@ -1,36 +1,59 @@
 #include <iostream>
-#include <map>
 #include <sstream>
-#include <string>
 
 using namespace std;
 
-class WordFrequencyCounter {
+class LoanEvaluator {
+    double LoanAmount = 0;
+    double AnnualIncome = 0;
+
+    bool isValidNumber(const string& str) {
+        stringstream ss(str);
+        double num;
+        ss >> num;
+        return !ss.fail() && ss.eof();
+    }
+
 public:
-    void countFrequency(const string& text) {
-        map<string, int> wordCount;
-        stringstream ss(text);
-        string word;
+    void inputDetails() {
+        string input;
 
-        while (ss >> word) {
-            ++wordCount[word];
-        }
+        do {
+            cout << "Enter the total loan amount you want to apply for: ";
+            getline(cin, input);
 
-        cout << "\nWord Frequency:\n";
-        for (const auto& pair : wordCount) {
-            cout << pair.first << ": " << pair.second << endl;
-        }
+            if (!isValidNumber(input)) {
+                cout << "Error: Please enter a valid numerical value for loan amount.\n";
+                continue;
+            }
+            LoanAmount = stod(input);
+
+            cout << "Enter your annual income: ";
+            getline(cin, input);
+
+            if (!isValidNumber(input)) {
+                cout << "Error: Please enter a valid numerical value for annual income.\n";
+                continue;
+            }
+            AnnualIncome = stod(input);
+
+            if (LoanAmount <= 0 || AnnualIncome <= 0) {
+                cout << "Error: Loan amount and annual income must both be greater than 0.\nPlease try again.\n\n";
+            }
+
+        } while (LoanAmount <= 0 || AnnualIncome <= 0);
+    }
+
+    void evaluate() const {
+        double ratio = LoanAmount / AnnualIncome;
+        cout << "Your Loan-to-Income Ratio is: " << ratio << endl;
     }
 };
 
 int main() {
-    string inputText;
-    WordFrequencyCounter counter;
-
-    cout << "Enter a sentence:\n";
-    getline(cin, inputText);
-
-    counter.countFrequency(inputText);
+    LoanEvaluator evaluator;
+    evaluator.inputDetails();
+    evaluator.evaluate();
 
     cout << "\n24CE014 JAYRAJSINH BHATTI\n";
     return 0;
