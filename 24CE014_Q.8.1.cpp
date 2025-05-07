@@ -1,55 +1,65 @@
 #include <iostream>
 #include <vector>
-#include <algorithm> // For reverse
+#include <algorithm>
 using namespace std;
 
-void ReverseUsingStdFunction(vector<int>& sequence) {
-    reverse(sequence.begin(), sequence.end());
-}
+class SequenceReverser {
+    vector<int> data;
 
-void ReverseUsingIterators(vector<int>& sequence) {
-    auto left = sequence.begin();
-    auto right = sequence.end() - 1;
+public:
+    void inputData() {
+        int n, value;
+        cout << "Enter number of elements: ";
+        cin >> n;
 
-    while (left < right) {
-        iter_swap(left, right); 
-        ++left;
-        --right;
+        cout << "Enter " << n << " integers:\n";
+        for (int i = 0; i < n; i++) {
+            cin >> value;
+            data.push_back(value);
+        }
     }
-}
 
-void displaySequence(const vector<int>& sequence) {
-    for (int num : sequence) {
-        cout << num << " ";
+    void displaySequence(const vector<int>& sequence) {
+        for (int num : sequence) {
+            cout << num << " ";
+        }
+        cout << endl;
     }
-    cout << endl;
-}
+
+    void reverseUsingStdFunction(vector<int>& sequence) {
+        reverse(sequence.begin(), sequence.end());
+    }
+
+    void reverseUsingIterators(vector<int>& sequence) {
+        auto left = sequence.begin();
+        auto right = sequence.end() - 1;
+        while (left < right) {
+            iter_swap(left, right);
+            ++left;
+            --right;
+        }
+    }
+
+    void process() {
+        vector<int> dataCopy = data;
+
+        cout << "\nOriginal sequence: ";
+        displaySequence(data);
+
+        reverseUsingStdFunction(data);
+        cout << "Reversed using std::reverse: ";
+        displaySequence(data);
+
+        reverseUsingIterators(dataCopy);
+        cout << "Reversed using manual iterators: ";
+        displaySequence(dataCopy);
+    }
+};
 
 int main() {
-    vector<int> data;
-    int n, Value;
-
-    cout << "Enter number of elements: ";
-    cin >> n;
-
-    cout << "Enter " << n << " integers:\n";
-    for (int i = 0; i < n; i++) {
-        cin >> Value;
-        data.push_back(Value);
-    }
-
-    vector<int> dataCopy = data;
-
-    cout << "\nOriginal sequence: ";
-    displaySequence(data);
-
-    ReverseUsingStdFunction(data);
-    cout << "Reversed using std::reverse: ";
-    displaySequence(data);
-
-    ReverseUsingIterators(dataCopy);
-    cout << "Reversed using manual iterators: ";
-    displaySequence(dataCopy);
+    SequenceReverser reverser;
+    reverser.inputData();
+    reverser.process();
 
     cout << "\n24CE014 JAYRAJSINH BHATTI\n";
     return 0;
