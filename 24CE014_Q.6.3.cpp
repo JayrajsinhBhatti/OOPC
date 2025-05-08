@@ -20,7 +20,7 @@ public:
         cin >> Size1;
         arr1 = new int[Size1];
         cout << "Enter elements of first sorted array: ";
-        for (int i = 0; i < Size1; ++i) {
+        for (int i = 0; i < Size1; i++) {
             cin >> arr1[i];
         }
 
@@ -28,7 +28,7 @@ public:
         cin >> Size2;
         arr2 = new int[Size2];
         cout << "Enter elements of second sorted array: ";
-        for (int i = 0; i < Size2; ++i) {
+        for (int i = 0; i < Size2; i++) {
             cin >> arr2[i];
         }
     }
@@ -54,7 +54,7 @@ public:
         }
 
         cout << "Merged Sorted Array: ";
-        for (int i = 0; i < Size1 + Size2; ++i) {
+        for (int i = 0; i < Size1 + Size2; i++) {
             cout << mergedArr[i] << " ";
         }
         cout << endl;
